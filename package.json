@@ -3,19 +3,27 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start:": "node node_modules/react-native/local-cli/cli.js start",
-    "start": "env REACT_DEBUGGER=\"$([ -d '/Applications/React Native Debugger.app' ] && echo \"open 'rndebugger://set-debugger-loc?host=localhost&port=8081' --args\")\" npm run start",
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "start:rnd": "env REACT_DEBUGGER=\"$([ -d '/Applications/React Native Debugger.app' ] && echo \"open 'rndebugger://set-debugger-loc?host=localhost&port=8081' --args\")\" npm run start",
     "ios": "cd ios && rm -rf build && cd .. && react-native run-ios --simulator=\"iPhone 7\"",
     "android": "cd android && ./gradlew clean && cd .. && react-native run-android",
-    "server": "json-server --watch server/db.json --port 1111",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix",
+    "prepush": "yarn lint"
   },
   "dependencies": {
+    "@babel/runtime": "^7.1.2",
     "react": "16.5.0",
     "react-native": "0.57.0"
   },
   "devDependencies": {
+    "babel-eslint": "^9.0.0",
     "babel-jest": "23.6.0",
+    "eslint": "^5.6.0",
+    "eslint-plugin-react": "^7.11.1",
+    "eslint-plugin-react-native": "^3.3.0",
+    "husky": "^0.14.3",
     "jest": "23.6.0",
     "metro-react-native-babel-preset": "0.45.3",
     "react-test-renderer": "16.5.0"
