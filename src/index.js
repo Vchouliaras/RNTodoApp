@@ -1,24 +1,13 @@
-// @flow
+import React from 'react'
+import { Provider } from 'react-redux'
 
-import React, {Component} from 'react'
-// import { StyleSheet, View } from 'react-native'
-
+import TodoStore from './redux/store/TodoStore'
 import AppTodoNavigation from './routes/Todos'
 
-type Props = {}
-export default class App extends Component<Props> {
-  render() {
-    return (
-      <AppTodoNavigation />
-    )
-  }
-}
+const App = () => (
+  <Provider store={TodoStore}>
+    <AppTodoNavigation />
+  </Provider>
+)
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     backgroundColor: '#F5FCFF'
-//   }
-// })
+export default App
