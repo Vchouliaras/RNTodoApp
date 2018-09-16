@@ -14,7 +14,12 @@ const dateFormat = () => {
 }
 
 const DateView = () => {
-  const {date, day, month } = dateFormat()
+  const {
+    date,
+    day,
+    month,
+  } = dateFormat()
+
   return (
     <View style={Styles.container}>
       <Text style={Styles.date}>{date}</Text>

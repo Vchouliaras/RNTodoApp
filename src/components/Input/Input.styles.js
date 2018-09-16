@@ -1,6 +1,6 @@
-import { Stylesheet, Dimensions } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 
-const styles = Stylesheet.create({
+const styles = StyleSheet.create({
   input: {
     padding: 12,
     backgroundColor: '#526373',
