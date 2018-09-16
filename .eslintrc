@@ -22,6 +22,7 @@
     "react/jsx-uses-vars": 2,
     "no-undef": 2,
     "semi": [2, "never"],
+    "no-debugger": 0,
     "react/prop-types": 2,
     "react/jsx-no-bind": 2,
     "react/jsx-no-duplicate-props": 2
