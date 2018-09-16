@@ -31,6 +31,7 @@
     "husky": "^0.14.3",
     "jest": "23.6.0",
     "metro-react-native-babel-preset": "0.45.3",
+    "prop-types": "^15.6.2",
     "react-test-renderer": "16.5.0",
     "redux-logger": "^3.0.6"
   },
