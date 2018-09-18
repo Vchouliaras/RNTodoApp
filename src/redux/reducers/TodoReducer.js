@@ -14,20 +14,47 @@
 
  import { default as ActionTypes } from '../actions/Types'
 
- const initialState = [{
-  'text': 'A new todo',
-  'time': Date.now(),
-  'type': 'active',
-  'completed': false,
-}]
+ const initialState = []
+
+/**
+ *
+ * Sample of the redux
+ *
+ * [
+ *  {
+ *   id
+ *   text
+ *   time
+ *   completed
+ *  }
+ * ]
+ */
 
  const TodoReducer = (state = initialState, action) => {
    switch (action.type) {
-     case ActionTypes.ADD_TODO:
-       return [
-         action.payload,
+
+    case ActionTypes.ADD_TODO:
+      return [
+        action.payload,
         ...state
       ]
+
+    case ActionTypes.DELETE_ACTIVE_TODO:
+      return state
+        .filter(todo => todo.id !== action.payload.id)
+
+    case ActionTypes.COMPLETE_TODO:
+      return state
+        .map(todo => {
+          if (todo.id === action.payload.id) {
+            todo.completed = true
+          }
+          return todo
+        })
+
+    case ActionTypes.DELETE_COMPLETED_TODO:
+      return state
+        .filter(todo => todo.id !== action.payload.id && todo.completed)
    }
 
    return state
