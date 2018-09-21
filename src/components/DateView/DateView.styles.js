@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native'
 
+import Theme from '../../styles'
+
 const styles = StyleSheet.create({
   container: {
     padding: 10,
@@ -7,19 +9,19 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   day: {
-    color: 'green',
-    fontSize: 15,
-    fontWeight: '400'
+    color: Theme.var.WHITE,
+    fontSize: Theme.var.FONT_SIZE_MEDIUM,
+    fontWeight: Theme.var.FONT_WEIGHT_NORMAL
   },
   date: {
-    color: 'green',
-    fontSize: 30,
-    fontWeight: '600'
+    color: Theme.var.WHITE,
+    fontSize: Theme.var.FONT_SIZE_XX_LARGE,
+    fontWeight: Theme.var.FONT_WEIGHT_HEAVY
   },
   month: {
-    color: 'green',
-    fontSize: 10,
-    fontWeight: '400'
+    color: Theme.var.WHITE,
+    fontSize: Theme.var.FONT_SIZE_SMALL,
+    fontWeight: Theme.var.FONT_WEIGHT_NORMAL
   }
 })
 

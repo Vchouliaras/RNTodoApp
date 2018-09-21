@@ -1,5 +1,7 @@
 import React from 'react'
 import { View, Text } from 'react-native'
+import PropTypes from 'prop-types'
+import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
 
 import Icon from 'react-native-vector-icons/FontAwesome'
 
@@ -17,9 +19,14 @@ const TodoItem = props => (
     </View>
     <View style={Styles.content}>
       <Text style={Styles.text}>{props.text}</Text>
-      <Text style={Styles.time}>{props.time}</Text>
+      <Text style={Styles.time}>{`${distanceInWordsToNow(props.time)} ago`}</Text>
     </View>
   </View>
 )
+
+TodoItem.propTypes = {
+  text: PropTypes.string,
+  time: PropTypes.number
+}
 
 export default TodoItem

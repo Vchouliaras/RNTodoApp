@@ -4,6 +4,9 @@ import { format } from 'date-fns'
 
 import Styles from './DateView.styles'
 
+/**
+ * Handles current date format
+ */
 const dateFormat = () => {
   const now = new Date()
   return {

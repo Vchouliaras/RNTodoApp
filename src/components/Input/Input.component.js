@@ -13,8 +13,14 @@ class Input extends React.Component {
     text: ''
   }
 
+  /**
+   * Handler callback
+   */
   onChangeText = text => this.setState({text})
 
+  /**
+   * Handler callback
+   */
   onSubmitEditing = () => {
     const { text } = this.state
 
@@ -55,6 +61,9 @@ Input.defaultProps = {
 }
 
 Input.propTypes = {
+  selectionColor: PropTypes.string,
+  placeholderTextColor: PropTypes.string,
+  underlineColorAndroid: PropTypes.string,
   addTodoHandler: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   maxLength: PropTypes.number,

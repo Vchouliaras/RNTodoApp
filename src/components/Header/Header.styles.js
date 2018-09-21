@@ -1,18 +1,15 @@
-import { StyleSheet, Platform } from 'react-native'
+import { StyleSheet } from 'react-native'
 
 import Theme from '../../styles'
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: Theme.var.PRIMARY_COLOR,
-    borderColor: Theme.var.SECONDARY_COLOR,
-    borderBottomWidth: 1,
-    height: Theme.mixin.getHeaderHeight(),
-    shadowColor: Theme.var.CERULEAN,
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.5,
-    elevation: 3,
     justifyContent: 'center',
+    alignItems: 'center',
+    borderBottomWidth: 0.5,
+    borderBottomColor: Theme.var.WHITE,
+    backgroundColor: Theme.var.CERULEAN,
+    height: Theme.mixin.getHeaderHeight(),
   },
   title: {
     textAlign: 'center',
