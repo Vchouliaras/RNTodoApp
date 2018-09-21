@@ -7,6 +7,8 @@
 //   text: 'Build my first Redux app'
 // }
 
+import uuid from 'uuid'
+
 import { default as ActionTypes } from './Types'
 
 export const addTodo = text => {
@@ -14,24 +16,24 @@ export const addTodo = text => {
     type: ActionTypes.ADD_TODO,
     payload: {
       text: text,
+      id: uuid.v1(),
       time: Date.now(),
-      type: 'active',
       completed: false,
     }
   }
 }
 
-export const completeTodo = index => ({
+export const completeTodo = id => ({
   type: ActionTypes.COMPLETE_TODO,
-  payload: index
+  payload: { id }
 })
 
-export const deleteActiveTodo = index => ({
+export const deleteActiveTodo = id => ({
   type: ActionTypes.DELETE_ACTIVE_TODO,
-  payload: index
+  payload: { id }
 })
 
-export const deleteCompletedTodo = index => ({
-  type: ActionTypes.DELETE_ACTIVE_TODO,
-  payload: index
+export const deleteCompletedTodo = id => ({
+  type: ActionTypes.DELETE_COMPLETED_TODO,
+  payload: { id }
 })
