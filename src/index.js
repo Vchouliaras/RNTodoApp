@@ -4,8 +4,10 @@ import { Provider } from 'react-redux'
 import TodoStore from './redux/store/TodoStore'
 import AppTodoNavigation from './routes/Todos'
 
+const { Store } = TodoStore()
+
 const App = () => (
-  <Provider store={TodoStore}>
+  <Provider store={Store}>
     <AppTodoNavigation />
   </Provider>
 )
