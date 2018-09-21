@@ -1,5 +1,10 @@
 import React from 'react'
-import { Text, View, FlatList  } from 'react-native'
+import { View, FlatList, Dimensions, SafeAreaView } from 'react-native'
+import SwipeView from 'react-native-swipeview'
+import Icon from 'react-native-vector-icons/FontAwesome'
+
+import Config from '../../config'
+import Styles from './ActiveTodos.styles'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -11,40 +16,122 @@ import Input from '../../components/Input/Input.component'
 import DateView from '../../components/DateView/DateView.component'
 import TodoItem from '../../components/TodoItem/TodoItem.component'
 
-import Styles from './ActiveTodos.styles'
+const WINDOW_WIDTH = Dimensions.get('window').width
 
 class ActiveTodos extends React.Component {
 
-  renderTodoItem = ({item, index}) => {
+  /**
+   * SwipeView callback to handle
+   * background component rendering
+   */
+  renderRightView = () => (
+    <View style={Styles.rowLeft}>
+      <Icon
+        style={Styles.icon}
+        name={'check'}
+        size={17}
+      />
+    </View>
+  )
+
+  /**
+   * SwipeView callback to handle
+   * background component rendering
+   */
+  renderLeftView = () => (
+    <View style={Styles.rowRight}>
+      <Icon
+        style={Styles.icon}
+        name={'times'}
+        size={17}
+      />
+    </View>
+  )
+
+  /**
+   * SwipeView callback to handle
+   * foreground component
+   */
+  renderVisibleContent = item => () => <TodoItem {...item} />
+
+  /**
+   * SwipeView callback to handle
+   * redux action calls
+   */
+  onSwipedLeft = id => () => this.props.completeTodo(id)
+
+
+  /**
+   * SwipeView callback to handle
+   * redux action calls
+   */
+  onSwipedRight = id => () => this.props.deleteActiveTodo(id)
+
+  /**
+   * Flatlist callback to handle item list rendering
+   */
+  renderTodoItem = ({item}) => {
     return (
-      <TodoItem key={index} {...item} />
+      <SwipeView
+        swipeDuration={Config.swipe.swipeDuration}
+        swipeToOpenPercent={Config.swipe.swipeToOpenPercent}
+        onSwipedLeft={this.onSwipedLeft(item.id)}
+        onSwipedRight={this.onSwipedRight(item.id)}
+        leftOpenValue={WINDOW_WIDTH}
+        rightOpenValue={ - WINDOW_WIDTH}
+        renderVisibleContent={this.renderVisibleContent(item)}
+        renderRightView={this.renderRightView}
+        renderLeftView={this.renderLeftView}
+      />
     )
   }
 
+  /**
+   * Flatlist callback to set a key for each list
+   */
+  keyExtractor = () => item => item.id
+
+  /**
+   * Flatlist callback to handle separator among items
+   */
+  renderFlatListSeparator = () => <View style={Styles.separator} />
+
   render() {
     return (
-      <View style={Styles.container}>
-        <Header title='My todo List!' />
-        <View style={Styles.header}>
-          <View style={Styles.inputContainer}>
-            <Input
-              addTodoHandler={this.props.addTodo}
-            />
+      <SafeAreaView style={Styles.safeView}>
+        <View style={Styles.container}>
+          <Header title={Config.navigation.activeTodos.title} />
+          <View style={Styles.header}>
+            <View style={Styles.inputContainer}>
+              <Input
+                addTodoHandler={this.props.addTodo}
+              />
+            </View>
+            <View style={Styles.dateViewContainer}>
+              <DateView />
+            </View>
           </View>
-          <DateView />
+          <FlatList
+            data={this.props.todos}
+            renderItem={this.renderTodoItem}
+            ItemSeparatorComponent={this.renderFlatListSeparator}
+            keyExtractor={this.keyExtractor()}
+          />
         </View>
-        <FlatList
-          data={this.props.todos}
-          renderItem={this.renderTodoItem}
-        />
-      </View>
+      </SafeAreaView>
     )
   }
 }
 
+
+/**
+ * Pass ActiveTodos to a Higher Order Component "connect"
+ * in order to connect to the redux store
+ */
+
 const mapStateToProps = state => {
   return {
-    todos: state.todos
+    todos: state.todos.filter(todo => !todo.completed)
   }
 }
 
