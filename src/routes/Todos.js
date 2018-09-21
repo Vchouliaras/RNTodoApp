@@ -1,22 +1,44 @@
 import React from 'react'
-import { Text, View } from 'react-native'
 import { createBottomTabNavigator } from 'react-navigation'
-import { BottomTabBar } from 'react-navigation-tabs'
-
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 import ActiveTodos from '../pages/ActiveTodos/ActiveTodos.component'
-// import CompletedTodosPage from '../containers/CompletedTodos'
+import CompletedTodos from '../pages/CompletedTodos/CompletedTodos.component'
 
-const TabBarComponent = props => <BottomTabBar {...props} />
+import Theme from '../styles'
 
-export default createBottomTabNavigator({
-  ActiveTodos: ActiveTodos,
-  // CompletedTodos: ActiveTodos
-},{
-  // backBehavior: ,
-  tabBarComponent: props =>
-      <TabBarComponent
-        {...props}
-        style={{ borderTopColor: 'green' }}
-      />,
-})
+// eslint-disable-next-line react/prop-types,react/display-name
+const TabBarIcon = icon => ({ tintColor }) => (
+  <Icon
+    name={icon}
+    size={19}
+    style={{ color: tintColor }}
+  />
+)
+
+const BottomNavigator = createBottomTabNavigator(
+  {
+    ActiveTodos: {
+      screen: ActiveTodos,
+      navigationOptions: {
+        tabBarIcon: TabBarIcon('list-ul')
+      }
+    },
+    CompletedTodos: {
+      screen: CompletedTodos,
+      navigationOptions: {
+        tabBarIcon: TabBarIcon('check')
+      }
+    },
+  },
+  {
+    backBehavior: ActiveTodos,
+    tabBarOptions: {
+      activeBackgroundColor: Theme.var.CERULEAN,
+      activeTintColor: Theme.var.WHITE,
+      labelStyle: { fontSize: Theme.var.FONT_SIZE_SMALL }
+    },
+  }
+)
+
+export default BottomNavigator
