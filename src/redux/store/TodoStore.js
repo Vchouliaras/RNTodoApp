@@ -30,9 +30,6 @@ export default () => {
 
   const Persistor = persistStore(Store)
 
-  // Clear persist store
-  // Persistor.purge()
-
   return {
     Store,
     Persistor

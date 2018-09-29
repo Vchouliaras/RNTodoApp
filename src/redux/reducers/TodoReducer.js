@@ -54,7 +54,7 @@
 
     case ActionTypes.DELETE_COMPLETED_TODO:
       return state
-      .filter(todo => todo.id !== action.payload.id)
+        .filter(todo => todo.id !== action.payload.id)
    }
 
    return state
