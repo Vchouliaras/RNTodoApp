@@ -14,8 +14,8 @@ const { Store, Persistor } = TodoStore()
 
 /**
   // Clear persist store
-  Persistor.purge()
- */
+  */
+ Persistor.purge()
 
 const App = () => (
   <Provider store={Store}>
