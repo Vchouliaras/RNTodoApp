@@ -1,4 +1,13 @@
-# Todo app with Redux
+# A Simple Todo App
+
+## Description
+
+A React Native Todo App integrated with Redux. <i>Developed for training purposes<i>
+
+![TodoApp](screenshot/react-native-todo-app.gif)
+
+
+## Development
 
 Type the command
 
